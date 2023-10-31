@@ -1,0 +1,41 @@
+{% extends 'store/main.html' %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow p-4">
+        <h2 class="text-center mb-4">Register</h2>
+        <form method="post">
+          {% csrf_token %}
+          <div class="row mb-3">
+            <div class="col">
+              {{ form.username.label_tag }}
+              {{ form.username }}
+              {{ form.username.errors }}
+            </div>
+            <div class="col">
+              {{ form.email.label_tag }}
+              {{ form.email }}
+              {{ form.email.errors }}
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col">
+              {{ form.password1.label_tag }}
+              {{ form.password1 }}
+              {{ form.password1.errors }}
+            </div>
+            <div class="col">
+              {{ form.password2.label_tag }}
+              {{ form.password2 }}
+              {{ form.password2.errors }}
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary mt-3">Register</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

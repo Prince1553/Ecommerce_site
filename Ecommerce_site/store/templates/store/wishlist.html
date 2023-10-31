@@ -1,0 +1,52 @@
+{% extends 'store/main.html' %}
+
+{% block content %}
+  {% include 'store/slider.html' %}
+  
+  <div class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card shadow ">
+            <div class="card-body cartdata">
+              {% if wishlist %}
+              {% for item in wishlist %}
+               <div class="row product_data">
+                <div class="col-md-2 my-auto">
+                    <img src="{{item.product.product_image.url}}" height="70px" width="70px" alt="image here">
+                </div>
+                <div class="col-md-3 my-auto">
+                     <h6>{{item.product.name}}</h6>
+                </div>
+                <div class="col-md-2 my-auto">
+                    <h6>{{item.product.selling_price | floatformat:2}}</h6>
+                </div>
+                <div class="col-md-3 my-auto">
+                    <input type="hidden" value="{{item.products.id}}" class="prod_id">
+                    {% csrf_token %}
+                    <a href="{% url 'productview' item.product.Category.slag item.product.slag %}" class="btn btn-primary"> View Product   </a>
+                </div>
+                <div class="col-md-2 my-auto">
+                     <button class="btn btn-danger delete-cart-item"><i class="fa fa-trash"></i>Remove</button>
+                </div>
+               </div>  
+               
+
+              {% endfor %}
+              
+              {% else %}
+              <h4> Your cart is empty</h4>
+              
+              {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+{% block script %}
+ 
+  
+     {% endblock script %}

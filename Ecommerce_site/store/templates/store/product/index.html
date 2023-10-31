@@ -1,0 +1,41 @@
+{% extends 'store/main.html' %}
+
+ {% block content %}
+  {% include 'store/slider.html' %}
+  <div class="py-3 bg-primary">
+    <div class="container">
+        <a class="text-white" href="{% url 'home'%}">Home/</a>
+        <a class="text-white" href="{% url 'collections'%}">Collections/</a>
+        <a class="text-white" href="{% url 'collectionsview' category_name.slag%}">{{category_name.name}}</a>
+
+    </div>
+</div>
+  <div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 >{{category_name.name}}</h1>
+            <div class="row">
+             {%for item in product %}   
+            <div class="col-md-3">
+                <div class= "card">
+                    <div class= "card" style="height: 25rem;">
+                        <a href="{% url 'productview' item.Category.slag item.slag %}">
+                        <div class= "card-body">
+                            <div class= "category-image">
+                                <img src="{{item.product_image.url}}" alt="Product image" class="w-100"/>
+                            </div>
+                            <h4 class="text-center">{{item.name}}</h4>
+                            <span class='float-start'>{{item.original_price | stringformat:'d'}}</span>
+                            <span class='float-end'>{{item.selling_price | stringformat:'d'}}</span>
+                        </div>
+                    </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+  </div>
+ {% endblock content %}
+ 

@@ -1,0 +1,84 @@
+{% extends 'store/main.html' %}
+
+ {% block content %}
+  {% include 'store/slider.html' %}
+  
+  <div class="container">
+    <div class="row ">
+        <div class="col-md-12">
+            <h2 class=" mt-2">Trending Products</h2><hr>
+            <div class="row owl-carousel owl-theme">
+             {%for item in trending_products %}   
+            <div class="product_data item"  >
+                <div class= "card" style="height: 23rem;" >
+                    <div class= "card-body">
+                        <a href="{% url 'productview' item.Category.slag item.slag %}">
+                        <div class= "card-body">
+                            <div class= "category-image" >
+                                <img src="{{item.product_image.url }}" alt="Product image" class="w-100"  ;/>
+                            </div>
+                            <h4 class="text-center text-dark"  >{{item.name}}</h4>
+                            <span class="text-dark" >Original Price:Rs <s>{{ item.original_price | floatformat:2 }}</s></span><br>
+                            <span class="text-dark">Selling Price: Rs {{ item.selling_price | floatformat:2 }}</span>
+                        </div>
+                    </a>
+                    {% comment %} <button type="button" class="btn btn-primary me-3 addToWishlist float-start">Add to Wishlist <i class="fas fa-heart"></i></button> {% endcomment %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+  </div>
+
+  <div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <hr><h2 class=" mt-2">categories Products</h2><hr>
+            <div class="row" style="height: 15rem;">
+             {%for item in category %}   
+            <div class="col-md-3" >
+                <div class= "card"style="height: 15rem;" >
+                    <div class= "card-body">
+                        <a href="{% url 'collectionsview' item.slag %}">
+                        <div class= "card-body">
+                            <div class= "category-image">
+                                <img src="{{item.image.url}}" alt="category image" class="w-100"/>
+                            </div>
+                            <h4>{{item.name}}</h4>
+                        </div>
+                    </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+  </div>
+ {% endblock content %}
+ {% block script %}
+
+<script>
+    $('.owl-carousel').owlCarousel({
+        loop:true,
+        margin:10,
+        dots:false,
+        nav:true,
+        responsive:{
+            0:{
+                items:1
+            },
+            600:{
+                items:3
+            },
+            1000:{
+                items:5
+            }
+        }
+    })
+</script>
+ {% endblock script %}
+
+ 
